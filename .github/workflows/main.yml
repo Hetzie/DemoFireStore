@@ -1,0 +1,31 @@
+on: push
+name: Test, Build and Release apk
+jobs:
+  build:
+    name: Build My Debug APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      - name: Grant execute permissions for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build and assemble APK
+        run: ./gradlew assembleDebug
+
+      - name: APK artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: app/build/outputs/apk/**/*.apk
+
+      - name: Show APK
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          artifacts: "app/build/outputs/apk/**/*.apk"
+          token: ${{ secrets.CICDTOKEN }}
+          tag: v1.0.0

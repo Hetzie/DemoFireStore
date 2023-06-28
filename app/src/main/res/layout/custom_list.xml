@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.demo.demofirestore.data.dummy.User" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/swipeRootView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="19dp"
+            app:show_mode="lay_down">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/layoutButtons"
+                    layout="@layout/item_edit_delete_button"
+                    android:layout_width="100dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="19dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="true"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardElevation="0.25dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginVertical="5dp"
+                    app:cardCornerRadius="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <TextView
+                            android:id="@+id/tvListName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={model.name}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvListEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={model.email}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintTop_toBottomOf="@+id/tvListName" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </com.daimajia.swipe.SwipeLayout>
+    </LinearLayout>
+</layout>
